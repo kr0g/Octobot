@@ -1,0 +1,9 @@
+{
+	"Name": "Octobot",
+  "OctopusUrl": "http://localhost/Octopus",
+  "ApiKey":  "API-SGEL8VWOJTTT7LZ2706SGQ78KM" ,
+	"Variables": [ 
+					        {"Name": "port", "Value": "9000"},
+					        {"Name": "Url", "Value": "http://fuckoff.com:9000", "Environment":  "dev" }
+	             ]
+}
