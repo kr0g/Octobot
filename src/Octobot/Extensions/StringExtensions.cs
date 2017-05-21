@@ -67,7 +67,7 @@ namespace Octobot.Extensions
 
         public static bool IsEmpty(this string value)
         {
-            return string.IsNullOrWhiteSpace(value);
+            return string.IsNullOrWhiteSpace(value) | string.IsNullOrWhiteSpace(value);
         }
 
         public static bool IsNotEmpty(this string value)
