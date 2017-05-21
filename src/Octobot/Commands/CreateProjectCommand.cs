@@ -1,27 +1,21 @@
-﻿using System;
-using Octobot.Models;
+﻿using Octobot.Models;
 using Octobot.Services;
 using Octopus.Client;
 
 namespace Octobot.Commands
 {
-    public class CreateProjectCommand : IOctoCommand
+    public class CreateProjectCommand : BaseProjectCommand
     {
-        private readonly IOctopusProxyFactory proxyFactory;
 
-        public CreateProjectCommand(IOctopusProxyFactory proxyFactory)
+        public CreateProjectCommand(IOctopusService service) : base(service)
         {
-            this.proxyFactory = proxyFactory;
         }
+        public override int Precidence => 0;
 
-        public int Precidence => 0;
-        public Project Run(Project item)
+        public override Project Run(Project item)
         {
-            var octo = new OctopusServerEndpoint(item.OctopusUrl, item.ApiKey);
-            var project = proxyFactory.GetProjectProxy(octo, item.Name);
-            if (project == null)
-                throw new ApplicationException($"{item.Name} project does not exist");
-            project.ApplyVariables(item.Variables);
+            var endpoint = new OctopusServerEndpoint(item.OctopusUrl, item.ApiKey);
+            Service.GetProjectProxy(endpoint, item.Name);
             return item;
         }
 

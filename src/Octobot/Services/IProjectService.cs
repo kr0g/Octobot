@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using Octobot.Models;
-using Octopus.Client.Model;
 
 namespace Octobot.Services
 {
-    public interface IProjectProxy
+    public interface IProjectService
     {
         void ApplyVariables(IEnumerable<Variable> itemVariables);
     }

@@ -49,7 +49,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\FluentValidation.7.0.0-beta3\lib\net45\FluentValidation.dll</HintPath>
+      <HintPath>..\..\packages\FluentValidation.7.0.0\lib\net45\FluentValidation.dll</HintPath>
     </Reference>
     <Reference Include="Jil, Version=2.15.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Jil.2.15.0\lib\net45\Jil.dll</HintPath>
@@ -73,14 +73,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ApplyVariablesCommand.cs" />
+    <Compile Include="Commands\BaseOctoCommand.cs" />
     <Compile Include="Commands\CreateProjectCommand.cs" />
-    <Compile Include="Commands\IOctoCommand.cs" />
+    <Compile Include="Commands\IProjectCommand.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Models\Variable.cs" />
-    <Compile Include="Services\IOctopusProxyFactory.cs" />
-    <Compile Include="Services\IProjectProxy.cs" />
-    <Compile Include="Services\ProjectProxy.cs" />
+    <Compile Include="Services\IOctopusService.cs" />
+    <Compile Include="Services\IProjectService.cs" />
+    <Compile Include="Services\OctopusService.cs" />
+    <Compile Include="Services\ProjectService.cs" />
     <Compile Include="Tasks\OctobotCommandChain.cs" />
     <Compile Include="Tasks\ParseProjectTask.cs" />
     <Compile Include="Program.cs" />

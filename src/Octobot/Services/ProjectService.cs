@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Octobot.Extensions;
 using Octobot.Models;
 using Octopus.Client;
@@ -7,12 +6,12 @@ using Octopus.Client.Model;
 
 namespace Octobot.Services
 {
-    public class ProjectProxy : IProjectProxy
+    public class ProjectService : IProjectService
     {
         private readonly ProjectResource project;
-        private readonly OctopusRepository repository;
+        private readonly IOctopusRepository repository;
 
-        public ProjectProxy(ProjectResource project, OctopusRepository repository)
+        public ProjectService(ProjectResource project, IOctopusRepository repository)
         {
             this.project = project;
             this.repository = repository;
@@ -27,8 +26,9 @@ namespace Octobot.Services
             repository.VariableSets.Modify(currentVariables);
         }
 
-        private static void ApplyVariable(Variable variable, VariableSetResource projectVariables)
+        private void ApplyVariable(Variable variable, VariableSetResource projectVariables)
         {
+            var environment = repository.Environments.FindByName(variable.Environment);
             var specification = new ScopeSpecification {{ScopeField.Environment, variable.Environment}};
             projectVariables.AddOrUpdateVariableValue(variable.Name, variable.Value, specification);
         }

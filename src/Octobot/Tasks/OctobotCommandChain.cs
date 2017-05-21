@@ -9,9 +9,9 @@ namespace Octobot.Tasks
 {
     public class OctobotCommandChain : ICommand<Project>
     {
-        private readonly IEnumerable<IOctoCommand> commands;
+        private readonly IEnumerable<IProjectCommand> commands;
 
-        public OctobotCommandChain(IEnumerable<IOctoCommand> commands)
+        public OctobotCommandChain(IEnumerable<IProjectCommand> commands)
         {
             this.commands = commands;
         }

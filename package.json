@@ -1,0 +1,46 @@
+{
+  "name": "metropolis",
+  "version": "0.0.78",
+  "description": "a code visualization tool",
+  "main": "gulpfile.js",
+  "files": [
+    "metro-install.ps1",
+    "metro-uninstall.ps1",
+    "dist"
+  ],
+  "dependencies": {
+    "eslint": "~3.5.0",
+    "eslint-plugin-react": "~6.3.0",
+    "sloc": "~0.1.11"
+  },
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-nunit-runner": "^1.1.0",
+    "gulp-dotnet-assembly-info": "^0.1.12",
+    "sync-exec": "^0.6.2",
+    "yargs": "^5.0.0"
+  },
+  "scripts": {
+    "postinstall": "TYPE metro-install.ps1 | PowerShell.exe -noprofile -",
+    "preuninstall": "TYPE metro-uninstall.ps1 | PowerShell.exe -noprofile -",
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dahood/metropolis.git"
+  },
+  "keywords": [
+    "codebase",
+    "visualization",
+    "static",
+    "code",
+    "analysis"
+  ],
+  "author": "Jonathan McCracken, Richard Hurst, Greg Cook",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/dahood/metropolis/issues"
+  },
+  "homepage": "https://github.com/dahood/metropolis#readme"
+}

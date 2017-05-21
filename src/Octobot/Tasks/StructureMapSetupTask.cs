@@ -4,9 +4,11 @@ using Common.Tasks;
 using FluentValidation;
 using Octobot.Commands;
 using Octobot.Models;
+using Octobot.Services;
 using Octobot.Utility;
 using Octobot.Validators;
 using StructureMap;
+using StructureMap.Pipeline;
 
 namespace Octobot.Tasks
 {
@@ -24,6 +26,7 @@ namespace Octobot.Tasks
                     x.ConnectImplementationsToTypesClosing(typeof(IValidator<>));
                     x.ConnectImplementationsToTypesClosing(typeof(ICommand<>));
                 });
+                _.For<IOctopusService>().Use<OctopusService>().Singleton();
                 _.For<IValidateOctobotArguments>().Use<ValidateOctobotArguments>();
                 _.For<IFileSystemValidator>().Use<FileSystemValidator>();
                 _.For<IFileSystem>().Use<FileSystem>();
