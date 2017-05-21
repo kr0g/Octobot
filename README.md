@@ -14,22 +14,26 @@ This runs octobot to modify the variables only, generally run by a sysadmin or d
 
 ### Octopus.yaml
 
-```
+```yaml
   Project:
     Name: 'Microservice A`
     Lifecycle: `Default Lifecycle`
+    Roles:
+      - `microservice-a-cluster` # the ASG cluster for the microservice
+      - `devops-aws-worker` # worker for running tasks for deployment by devops, like slack notification, cloudformation stack creation
     Steps:
       - Comply:
         Type: Manual Intervention
         Name: Comply with Sox
         OnlyInEnvironment: PRE, PROD
-        Setting2: ...
       - DeployNewASG:
         Type: AWS - Create Cloud Formation Stack
         Name: Deploy to new ASG
+        Role: `devops-aws-worker`
       - DeployPackage:
         Type: Deploy
         Name: Deploy Package
+        Role: `microservice-a-cluster`
       - ManualTest:
         Type: Manual Intervention
         Name: Validate Deployment
@@ -37,6 +41,7 @@ This runs octobot to modify the variables only, generally run by a sysadmin or d
       - Notify:
         Type: Slack
         Name: Notify Deploy Channel
+        Role: `devops-aws-worker`
         OnlyInEnvironment: PRE, PROD
     Variables:
       MicroserviceBurl:
