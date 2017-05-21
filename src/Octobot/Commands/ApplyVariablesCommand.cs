@@ -44,8 +44,7 @@ namespace Octobot.Commands
 
         private static ScopeValue GetIdsFrom(IEnumerable<EnvironmentResource> environments)
         {
-            if (environments.IsEmpty()) return new ScopeValue();
-            return new ScopeValue(environments.Select(x => x.Id));
+            return environments.IsEmpty() ? new ScopeValue() : new ScopeValue(environments.Select(x => x.Id));
         }
     }
 }
