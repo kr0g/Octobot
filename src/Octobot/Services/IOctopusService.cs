@@ -1,13 +1,13 @@
-﻿using Octopus.Client;
-using Octopus.Client.Model;
+﻿using Octobot.Models;
+using Octopus.Client;
 
 namespace Octobot.Services
 {
     public interface IOctopusService
     {
-        ProjectResource FindOrCreateProject(IOctopusRepository repository, string projectName);
-        IProjectService GetProjectProxy(OctopusServerEndpoint endpoint, string name);
-        IOctopusRepository Repository { get; }
-        IProjectService Project { get; }
+        void Initialize(OctopusServerEndpoint endpoint);
+        IVariableService FindOrCreateProject(Project project);
+        IVariableService Variable { get; }
+        IRepositoryService RepositoryService { get; }
     }
 }

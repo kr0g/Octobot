@@ -1,28 +1,30 @@
-﻿using Octopus.Client;
+﻿using Octobot.Models;
+using Octopus.Client;
 using Octopus.Client.Model;
 
 namespace Octobot.Services
 {
     public class OctopusService : IOctopusService
     {
-        public IOctopusRepository Repository { get; private set; }
-        public IProjectService Project { get; private set; }
+        public IRepositoryService RepositoryService { get; set; }
+        public IVariableService Variable { get; private set; }
 
-        public IProjectService GetProjectProxy(OctopusServerEndpoint endpoint, string name)
+        public IVariableService FindOrCreateProject(Project model)
         {
-            Repository = new OctopusRepository(endpoint);
-            var project = Repository.Projects.FindByName(name) ?? FindOrCreateProject(Repository, name);
-            Project = new ProjectService(project, Repository);
-            return Project;
+            var project = RepositoryService.Projects.FindByName(model.Name) ?? CreateProject(model);
+            return Variable = new VariableService(project, RepositoryService);
         }
 
-        public ProjectResource FindOrCreateProject(IOctopusRepository repository, string projectName)
+        public ProjectResource CreateProject(Project model)
         {
-            var lifecycle = repository.Lifecycles.FindAll()[0];
-            var resource = repository.ProjectGroups.FindAll()[0];
-            repository.Projects.CreateOrModify(projectName, resource, lifecycle).Save();
-            return repository.Projects.FindByName(projectName); 
+            RepositoryService.Projects.CreateOrModify(model.Name, RepositoryService.DefaultProjectGroup,
+                                                      RepositoryService.DefaultLifecycle, model.Description).Save();
+            return RepositoryService.Projects.FindByName(model.Name); 
         }
 
+        public void Initialize(OctopusServerEndpoint endpoint)
+        {
+            RepositoryService = new RepositoryService(new OctopusRepository(endpoint));
+        }
     }
 }

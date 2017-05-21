@@ -1,6 +1,6 @@
 ﻿using Common.Container;
 using Octobot.Extensions;
-using Octobot.Tasks;
+using Octobot.Startup;
 using Octobot.Validators;
 
 namespace Octobot

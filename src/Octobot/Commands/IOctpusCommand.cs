@@ -3,7 +3,7 @@ using Octobot.Models;
 
 namespace Octobot.Commands
 {
-    public interface IProjectCommand : ICommand<Project>
+    public interface IOctpusCommand : ICommand<OctopusDeploy>
     {
         int Precidence { get; }
     }

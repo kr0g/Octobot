@@ -5,22 +5,21 @@ using Octobot.Commands;
 using Octobot.Extensions;
 using Octobot.Models;
 
-namespace Octobot.Tasks
+namespace Octobot.Startup
 {
-    public class OctobotCommandChain : ICommand<Project>
+    public class OctobotCommandChain : ICommand<OctopusDeploy>
     {
-        private readonly IEnumerable<IProjectCommand> commands;
+        private readonly IEnumerable<IOctpusCommand> commands;
 
-        public OctobotCommandChain(IEnumerable<IProjectCommand> commands)
+        public OctobotCommandChain(IEnumerable<IOctpusCommand> commands)
         {
             this.commands = commands;
         }
 
-        public Project Run(Project item)
+        public OctopusDeploy Run(OctopusDeploy item)
         {
             commands.OrderBy(x => x.Precidence).ForEach(each => each.Run(item));
             return item;
         }
-        
     }
 }

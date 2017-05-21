@@ -3,16 +3,16 @@ using Octobot.Services;
 
 namespace Octobot.Commands
 {
-    public abstract class BaseProjectCommand : IProjectCommand
+    public abstract class BaseOctpusCommand : IOctpusCommand
     {
         protected IOctopusService Service { get; private set; }
 
-        protected BaseProjectCommand(IOctopusService service)
+        protected BaseOctpusCommand(IOctopusService service)
         {
             Service = service;
         }
 
-        public abstract Project Run(Project item);
+        public abstract OctopusDeploy Run(OctopusDeploy item);
         public abstract int Precidence { get; }
     }
 }

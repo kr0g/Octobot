@@ -74,20 +74,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\ApplyVariablesCommand.cs" />
-    <Compile Include="Commands\BaseOctoCommand.cs" />
-    <Compile Include="Commands\CreateProjectCommand.cs" />
-    <Compile Include="Commands\IProjectCommand.cs" />
+    <Compile Include="Commands\BaseOctpusCommand.cs" />
+    <Compile Include="Commands\CreateEnvironmentsCommand.cs" />
+    <Compile Include="Commands\CreateOctpusCommand.cs" />
+    <Compile Include="Commands\IOctpusCommand.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Models\OctopusDeploy.cs" />
     <Compile Include="Models\Variable.cs" />
     <Compile Include="Services\IOctopusService.cs" />
-    <Compile Include="Services\IProjectService.cs" />
+    <Compile Include="Services\IVariableService.cs" />
+    <Compile Include="Services\IRepositoryService.cs" />
     <Compile Include="Services\OctopusService.cs" />
-    <Compile Include="Services\ProjectService.cs" />
-    <Compile Include="Tasks\OctobotCommandChain.cs" />
-    <Compile Include="Tasks\ParseProjectTask.cs" />
+    <Compile Include="Services\VariableService.cs" />
+    <Compile Include="Services\RepositoryService.cs" />
+    <Compile Include="Startup\OctobotCommandChain.cs" />
+    <Compile Include="Startup\ParseProjectTask.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Tasks\StructureMapSetupTask.cs" />
+    <Compile Include="Startup\StructureMapSetupTask.cs" />
     <Compile Include="Utility\FileSystem.cs" />
     <Compile Include="Utility\IFileSystem.cs" />
     <Compile Include="Validators\ValidateOctobotArguments.cs" />
@@ -123,5 +127,6 @@
       <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

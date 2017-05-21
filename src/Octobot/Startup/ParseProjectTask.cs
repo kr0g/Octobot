@@ -1,7 +1,7 @@
 ﻿using Octobot.Models;
 using Octobot.Utility;
 
-namespace Octobot.Tasks
+namespace Octobot.Startup
 {
     public class ParseProjectTask
     {
@@ -12,9 +12,9 @@ namespace Octobot.Tasks
             this.fileSystem = fileSystem;
         }
 
-        public Project Run(string fileName)
+        public OctopusDeploy Run(string fileName)
         {
-            return fileSystem.ReadJsonFile<Project>(fileName);
+            return fileSystem.ReadJsonFile<OctopusDeploy>(fileName);
         }
     }
 }

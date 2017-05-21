@@ -2,15 +2,12 @@ using Common.Commands;
 using Common.Container;
 using Common.Tasks;
 using FluentValidation;
-using Octobot.Commands;
-using Octobot.Models;
 using Octobot.Services;
 using Octobot.Utility;
 using Octobot.Validators;
 using StructureMap;
-using StructureMap.Pipeline;
 
-namespace Octobot.Tasks
+namespace Octobot.Startup
 {
     public class StructureMapSetupTask : ITask
     {
@@ -20,7 +17,7 @@ namespace Octobot.Tasks
             {
                 _.Scan(x =>
                 {
-                    x.TheCallingAssembly();
+                    x.AssemblyContainingType<Program>();
                     x.WithDefaultConventions();
                     x.RegisterConcreteTypesAgainstTheFirstInterface();
                     x.ConnectImplementationsToTypesClosing(typeof(IValidator<>));
