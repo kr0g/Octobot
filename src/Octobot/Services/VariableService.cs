@@ -19,5 +19,10 @@ namespace Octobot.Services
         {
             Variables.AddOrUpdateVariableValue(name, value, specification);
         }
+
+        public void Save()
+        {
+            repository.VariableSets.Modify(Variables);
+        }
     }
 }

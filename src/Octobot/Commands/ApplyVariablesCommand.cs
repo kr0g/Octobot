@@ -25,6 +25,7 @@ namespace Octobot.Commands
                 var scopeSpecification = CreateScopeSpecification(each);
                 Service.Variable.AddOrUpdateVariable(each.Name, each.Value, scopeSpecification);
             });
+            Service.Variable.Save();
             return item;
         }
         
