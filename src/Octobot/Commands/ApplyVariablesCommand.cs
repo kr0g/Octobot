@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
 using Common;
 using Octobot.Extensions;
@@ -22,6 +20,7 @@ namespace Octobot.Commands
         {
             item.Project.Variables.ForEach(each =>
             {
+                Service.Variable.Remove(each.Name);
                 var scopeSpecification = CreateScopeSpecification(each);
                 Service.Variable.AddOrUpdateVariable(each.Name, each.Value, scopeSpecification);
             });

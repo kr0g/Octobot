@@ -1,16 +1,16 @@
-﻿using Octopus.Client.Model;
+﻿using System.Linq;
+using Octobot.Models;
+using Octopus.Client.Model;
 
 namespace Octobot.Services
 {
     public class VariableService : IVariableService
     {
-        private readonly ProjectResource project;
         private readonly IRepositoryService repository;
         private readonly VariableSetResource variables;
 
         public VariableService(ProjectResource project, IRepositoryService repository)
         {
-            this.project = project;
             this.repository = repository;
             variables = repository.VariableSets.Get(project.VariableSetId);
         }
@@ -23,6 +23,13 @@ namespace Octobot.Services
         public void Save()
         {
             repository.VariableSets.Modify(variables);
+        }
+
+        public void Remove(string name)
+        {
+            var toReplace = variables.Variables.FirstOrDefault(x => x.Name == name);
+            if (toReplace == null) return;
+            variables.Variables.Remove(toReplace);
         }
     }
 }

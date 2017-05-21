@@ -18,6 +18,7 @@ namespace Octobot.Services
         public LifecycleResource DefaultLifecycle => repository.Lifecycles.FindAll()[0];
         public ProjectGroupResource DefaultProjectGroup => repository.ProjectGroups.FindAll()[0];
         public IEnvironmentRepository Environments => repository.Environments;
+
         public EnvironmentResource FindEnvironmentByName(string name)
         {
             return repository.Environments.FindByName(name);

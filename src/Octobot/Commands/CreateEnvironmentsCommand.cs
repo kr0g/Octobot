@@ -1,4 +1,7 @@
-﻿using Octobot.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Octobot.Extensions;
+using Octobot.Models;
 using Octobot.Services;
 
 namespace Octobot.Commands
@@ -13,8 +16,17 @@ namespace Octobot.Commands
 
         public override OctopusDeploy Run(OctopusDeploy item)
         {
+            GetEnvironments(item.Project).ForEach(each =>
+            {
+                Service.RepositoryService.Environments.CreateOrModify(each);
+            });
+            
             return item;
         }
 
+        private IEnumerable<string> GetEnvironments(Project project)
+        {
+            return project.Variables.SelectMany(x => x.Environments).ToList();
+        }
     }
 }

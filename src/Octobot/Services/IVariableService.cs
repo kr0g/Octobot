@@ -1,4 +1,5 @@
-﻿using Octopus.Client.Model;
+﻿using Octobot.Models;
+using Octopus.Client.Model;
 
 namespace Octobot.Services
 {
@@ -6,5 +7,6 @@ namespace Octobot.Services
     {
         void AddOrUpdateVariable(string varName, string varValue, ScopeSpecification scopeSpecification);
         void Save();
+        void Remove(string each);
     }
 }
