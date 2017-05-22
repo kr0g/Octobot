@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Octobot.Models;
 using Octopus.Client.Model;
 
 namespace Octobot.Services

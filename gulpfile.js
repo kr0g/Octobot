@@ -10,7 +10,7 @@ var assemblyInfo = require('gulp-dotnet-assembly-info');
 var buildPath = '%CD%\\build';
 var msBuildConfiguration = 'Release';
 var version = '0.0.1'; //using package.json
-var nunitConsole = 'packages\\NUnit.ConsoleRunner.3.5.0\\tools\\nunit3-console.exe';
+var nunitConsole = 'packages\\NUnit.ConsoleRunner.3.6.1\\tools\\nunit3-console.exe';
 
 // Gulp Default
 
@@ -27,11 +27,11 @@ gulp.task('assemblyInfo', function() {
 
     gulp.src('**/AssemblyInfo.cs')
         .pipe(assemblyInfo({
-            title: 'Metropolis',
-            description: 'A code reivew and visualization tool', 
+            title: 'Octobot',
+            description: 'An automation tool for OctopusDeploy', 
             configuration: 'Release', 
             company: 'Dahood.io', 
-            product: 'Metropolis', 
+            product: 'Octobot', 
             copyright: 'Copyright © Jonathan McCracken, Greg Cook, and Richard Hurst 2016', 
             trademark: 'Dahood.io', 
             version: '0.' + version,
@@ -39,16 +39,15 @@ gulp.task('assemblyInfo', function() {
         .pipe(gulp.dest('.'));
 });
 
-
 gulp.task('msbuild', function () {
   console.log('MSBuild Release Configuration: ' + msBuildConfiguration);
-  var cmd = '"C:\\Program Files (x86)\\MSBuild\\14.0\\Bin\\MSBuild.exe\" Metropolis.sln /t:Rebuild ' +
+  var cmd = '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\MSBuild\\15.0\\Bin\\msbuild.exe\" Octobot.sln /t:Rebuild ' +
     '/p:OutDir=' + buildPath + ';Configuration=' + msBuildConfiguration + ' /maxcpucount';
   console.log(exec(cmd).stdout);
 });
 
 gulp.task('test', ['compile'], function () {
-    gulp.src(['build\\*.Test.dll'], {read: false})
+    gulp.src(['build\\*.Tests.dll'], {read: false})
         .pipe(nunit({
         	noresult: true, //TODO: Fix this
             result: 'build\\Foo.xml',
@@ -89,11 +88,10 @@ gulp.task('version', function() {
 // Collection Binaries (e.g. checkstyle .jar) for eslint, checkstyle, fxcop, etc that parsers 
 // use to automate the collection of metrics 
 
-gulp.task('package', ['package-clean', 'package-collection-cpd', 'package-collection-checkstyle', 
-    'package-collection-settings'], function() {   
+gulp.task('package', ['package-clean'], function() {   
 	gulp.src(['build\\*.dll', 'build\\*.exe', 'build\\*.config',
         // exclude all these test files
-        '!build\\Metropolis.Test.dll',
+        '!build\\Octobot.Tests.dll',
         '!build\\FluentAssertions.Core.dll', 
         '!build\\FluentAssertions.dll', 
         '!build\\nunit.framework.dll', 
@@ -104,18 +102,3 @@ gulp.task('package', ['package-clean', 'package-collection-cpd', 'package-collec
 gulp.task('package-clean'), function(){
   del(['dist']);
 }
-
-gulp.task('package-collection-settings', function() {
-    gulp.src(['build\\Collection\\Settings\\**'])
-        .pipe(gulp.dest('dist\\Collection\\Settings'));
-});
-
-gulp.task('package-collection-checkstyle', function() {
-    gulp.src(['build\\Collection\\Binaries\\*.jar'])
-        .pipe(gulp.dest('dist\\Collection\\Binaries'));
-});
-
-gulp.task('package-collection-cpd', function() {
-    gulp.src(['build\\Collection\\Binaries\\cpd\\*.jar'])
-        .pipe(gulp.dest('dist\\Collection\\Binaries\\cpd'));
-});
