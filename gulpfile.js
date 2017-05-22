@@ -11,6 +11,7 @@ var buildPath = '%CD%\\build';
 var msBuildConfiguration = 'Release';
 var version = '0.0.1'; //using package.json
 var nunitConsole = 'packages\\NUnit.ConsoleRunner.3.6.1\\tools\\nunit3-console.exe';
+var msBuildExe = '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\MSBuild\\15.0\\Bin\\msbuild.exe\"';
 
 // Gulp Default
 
@@ -41,8 +42,7 @@ gulp.task('assemblyInfo', function() {
 
 gulp.task('msbuild', function () {
   console.log('MSBuild Release Configuration: ' + msBuildConfiguration);
-  var cmd = '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\MSBuild\\15.0\\Bin\\msbuild.exe\" Octobot.sln /t:Rebuild ' +
-    '/p:OutDir=' + buildPath + ';Configuration=' + msBuildConfiguration + ' /maxcpucount';
+  var cmd = msBuildExe + ' Octobot.sln /t:Rebuild ' + '/p:OutDir=' + buildPath + ';Configuration=' + msBuildConfiguration + ' /maxcpucount';
   console.log(exec(cmd).stdout);
 });
 
