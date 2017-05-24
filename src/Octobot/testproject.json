@@ -1,6 +1,6 @@
 {
   "Url": "http://localhost/Octopus",
-  "ApiKey": "API-SGEL8VWOJTTT7LZ2706SGQ78KM",
+  "ApiKey": "API-QXIY66WTLHMU3N5DB41OJGQDRK",
   "Project": {
     "Name": "Octobot",
     "Variables": [
@@ -11,8 +11,13 @@
       },
       {
         "Name": "Url",
-        "Value": "http://fuckoff.com:9000",
-        "Environments": ["dev", "test"]
+        "Value": "http://fff_dev_test.com:9000",
+        "Environments": [ "dev", "test" ]
+      },
+      {
+        "Name": "Url",
+        "Value": "http://fff_pre.com:9000",
+        "Environments": [ "PRE" ]
       }
     ]
   }

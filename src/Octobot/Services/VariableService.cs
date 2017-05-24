@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Octopus.Client.Model;
+﻿using Octopus.Client.Model;
 
 namespace Octobot.Services
 {
@@ -14,21 +13,15 @@ namespace Octobot.Services
             variables = repository.VariableSets.Get(project.VariableSetId);
         }
         
-        public void AddOrUpdateVariable(string name, string value, ScopeSpecification specification)
+        public void AddOrUpdateVariable(string name, string value, ScopeSpecification specification, bool isSensitive=false)
         {
-            variables.AddOrUpdateVariableValue(name, value, specification);
+            variables.AddOrUpdateVariableValue(name, value, specification, isSensitive);
         }
 
         public void Save()
         {
             repository.VariableSets.Modify(variables);
         }
-
-        public void Remove(string name)
-        {
-            var toReplace = variables.Variables.FirstOrDefault(x => x.Name == name);
-            if (toReplace == null) return;
-            variables.Variables.Remove(toReplace);
-        }
+        
     }
 }

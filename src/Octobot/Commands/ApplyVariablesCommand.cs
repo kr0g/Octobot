@@ -20,7 +20,6 @@ namespace Octobot.Commands
         {
             item.Project.Variables.ForEach(each =>
             {
-                Service.Variable.Remove(each.Name);
                 var scopeSpecification = CreateScopeSpecification(each);
                 Service.Variable.AddOrUpdateVariable(each.Name, each.Value, scopeSpecification);
             });

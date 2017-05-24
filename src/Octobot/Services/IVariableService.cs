@@ -1,12 +1,10 @@
-﻿using Octobot.Models;
-using Octopus.Client.Model;
+﻿using Octopus.Client.Model;
 
 namespace Octobot.Services
 {
     public interface IVariableService
     {
-        void AddOrUpdateVariable(string varName, string varValue, ScopeSpecification scopeSpecification);
+        void AddOrUpdateVariable(string varName, string varValue, ScopeSpecification scopeSpecification, bool isSensitive = false);
         void Save();
-        void Remove(string each);
     }
 }
