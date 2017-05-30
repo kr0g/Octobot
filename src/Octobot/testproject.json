@@ -10,6 +10,12 @@
         "Environments": []
       },
       {
+        "Name": "password",
+        "Value": "abcd123",
+        "IsSensitive": true,
+        "Environments": []
+      },
+      {
         "Name": "Url",
         "Value": "http://fff_dev_test.com:9000",
         "Environments": [ "dev", "test" ]
